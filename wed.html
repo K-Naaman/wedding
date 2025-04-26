@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nikkah Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #fff8f0 url('https://www.transparenttextures.com/patterns/cream-dust.png');
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      color: #5a4b2e;
+      padding: 40px 20px;
+    }
+    .bismillah {
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: #a67c00;
+      animation: fadeIn 2s ease forwards;
+    }
+    .photos {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+      animation: fadeIn 2.5s ease forwards;
+    }
+    .photos img {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #d4af37;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.5s;
+    }
+    .photos img:hover {
+      transform: scale(1.05);
+    }
+    .names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      margin: 20px 0;
+      color: #8b6d1f;
+      animation: fadeIn 3s ease forwards;
+    }
+    .invitation-text {
+      font-size: 22px;
+      margin: 20px 0;
+      animation: fadeIn 3.5s ease forwards;
+    }
+    .details {
+      font-size: 18px;
+      line-height: 1.7;
+      margin-top: 30px;
+      animation: fadeIn 4s ease forwards;
+    }
+    .countdown {
+      font-size: 24px;
+      margin: 40px 0 20px;
+      color: #8b6d1f;
+      animation: fadeIn 4s ease forwards;
+    }
+    .buffer-bar {
+      position: relative;
+      background: #f5deb3;
+      height: 40px;
+      border-radius: 10px;
+      margin: 20px auto 40px;
+      width: 90%;
+      overflow: hidden;
+    }
+    .groom, .bride {
+      position: absolute;
+      top: -5px;
+      font-size: 32px;
+      transition: left 1s ease, right 1s ease;
+    }
+    .groom {
+      left: 0;
+    }
+    .bride {
+      right: 0;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bismillah">
+    بسم الله الرحمن الرحيم
+  </div>
+
+  <div class="photos">
+    <div>
+      <img src="bride.jpeg" alt="Bride Photo">
+      <div style="margin-top:10px;"></div>
+    </div>
+    <div>
+      <img src="groom.jpeg" alt="Groom Photo">
+      <div style="margin-top:10px;"></div>
+    </div>
+  </div>
+
+  <div class="names">
+    Khamis & Farida
+  </div>
+
+  <div class="invitation-text">
+    Invite you to attend their wedding
+  </div>
+
+  <div class="countdown" id="countdown">
+    Loading countdown...
+  </div>
+
+  <div class="buffer-bar">
+    <div class="groom" id="groom">🤵</div>
+    <div class="bride" id="bride">👰</div>
+  </div>
+
+  <div class="details">
+    <strong>Nikkah:</strong> 13<sup>th</sup> June 2025 after Asr Salah at Masjid Aqswa Kisauni<br>
+    <strong>Lunch:</strong> 14<sup>th</sup> June 2025 at Star of the Sea Hall.
+  </div>
+
+  <script>
+    const countdown = document.getElementById('countdown');
+    const groom = document.getElementById('groom');
+    const bride = document.getElementById('bride');
+    
+    // Wedding date
+    const weddingDate = new Date('2025-04-26T17:57:00').getTime();
+    const startDate = new Date().getTime();
+    
+    function updateTimer() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+      
+      if (distance < 0) {
+        countdown.innerHTML = "💍 The wedding day has arrived!";
+        groom.style.left = "45%";
+        bride.style.right = "45%";
+        return;
+      }
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s until Khamis & Farida's Nikkah`;
+
+      // Move emojis based on how close the date is
+      const totalDuration = weddingDate - startDate;
+      const elapsed = now - startDate;
+      const progress = Math.min(elapsed / totalDuration, 1); // from 0 to 1
+
+      groom.style.left = (progress * 45) + '%';
+      bride.style.right = (progress * 45) + '%';
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+
+</body>
+</html>
