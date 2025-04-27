@@ -58,20 +58,39 @@
       animation: fadeIn 4s ease forwards;
     }
     .countdown {
-      font-size: 24px;
-      margin: 40px 0 20px;
-      color: #8b6d1f;
-      animation: fadeIn 4s ease forwards;
-    }
-    .buffer-bar {
-      position: relative;
-      background: #f5deb3;
-      height: 40px;
-      border-radius: 10px;
-      margin: 20px auto 40px;
-      width: 90%;
-      overflow: hidden;
-    }
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0 10px;
+  animation: fadeIn 4s ease forwards;
+}
+.icon {
+  position: absolute;
+  top: -15px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #d4af37;
+  transition: left 1s ease, right 1s ease;
+}
+.timer-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #8b6d1f;
+}
+.buffer-bar {
+  position: relative;
+  background: #f5deb3;
+  height: 40px;
+  border-radius: 10px;
+  margin: 20px auto 40px;
+  width: 90%;
+  overflow: hidden;
+}
     .groom, .bride {
       position: absolute;
       top: -5px;
@@ -88,6 +107,24 @@
       from {opacity: 0;}
       to {opacity: 1;}
     }
+    #timer {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.label {
+  font-size: 16px;
+  margin-top: 5px;
+  color: #5a4b2e;
+}
+#until-text {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+  color: #8b6d1f;
+  animation: fadeIn 4.5s ease forwards;
+}
+
   </style>
 </head>
 <body>
@@ -113,61 +150,95 @@
 
   <div class="invitation-text">
     Invite you to attend their wedding
+    <div class="invitation-text">
+      on
+    </div>
   </div>
+  
 
-  <div class="countdown" id="countdown">
-    Loading countdown...
-  </div>
-
-  <div class="buffer-bar">
-    <div class="groom" id="groom">🤵</div>
-    <div class="bride" id="bride">👰</div>
-  </div>
-
+ 
   <div class="details">
     <strong>Nikkah:</strong> 13<sup>th</sup> June 2025 after Asr Salah at Masjid Aqswa Kisauni<br>
     <strong>Lunch:</strong> 14<sup>th</sup> June 2025 at Star of the Sea Hall.
   </div>
 
+  <div class="countdown">
+    <div class="timer-box">
+      <div id="days">0</div>
+      <div class="label">Days</div>
+    </div>
+    <div class="timer-box">
+      <div id="hours">0</div>
+      <div class="label">Hours</div>
+    </div>
+    <div class="timer-box">
+      <div id="minutes">0</div>
+      <div class="label">Mins</div>
+    </div>
+    <div class="timer-box">
+      <div id="seconds">0</div>
+      <div class="label">Secs</div>
+    </div>
+  </div>
+  
+  <div id="until-text">
+    <div>until</div>
+    <div>Khamis & Farida's Nikkah</div>
+  </div>
+  
+  <div class="buffer-bar">
+    <img src="groom.jpeg" alt="Groom Photo" class="icon" id="groom">
+    <img src="bride.jpeg" alt="Bride Photo" class="icon" id="bride">
+  </div>
+  
+
+
   <script>
-    const countdown = document.getElementById('countdown');
-    const groom = document.getElementById('groom');
-    const bride = document.getElementById('bride');
-    
-    // Wedding date
-    const weddingDate = new Date('2025-06-14T15:30:00').getTime();
-    const startDate = new Date().getTime();
-    
-    function updateTimer() {
-      const now = new Date().getTime();
-      const distance = weddingDate - now;
-      
-      if (distance < 0) {
-        countdown.innerHTML = "💍 The wedding day has arrived!";
-        groom.style.left = "45%";
-        bride.style.right = "45%";
-        return;
-      }
-      
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s until Khamis & Farida's Nikkah`;
+    const daysEl = document.getElementById('days');
+const hoursEl = document.getElementById('hours');
+const minutesEl = document.getElementById('minutes');
+const secondsEl = document.getElementById('seconds');
+const groom = document.getElementById('groom');
+const bride = document.getElementById('bride');
 
-      // Move emojis based on how close the date is
-      const totalDuration = weddingDate - startDate;
-      const elapsed = now - startDate;
-      const progress = Math.min(elapsed / totalDuration, 1); // from 0 to 1
+// Wedding date
+const weddingDate = new Date('2025-06-14T15:30:00').getTime();
+const startDate = new Date().getTime();
 
-      groom.style.left = (progress * 45) + '%';
-      bride.style.right = (progress * 45) + '%';
-    }
+function updateTimer() {
+  const now = new Date().getTime();
+  const distance = weddingDate - now;
 
-    setInterval(updateTimer, 1000);
-    updateTimer();
-  </script>
+  if (distance < 0) {
+    document.getElementById('until-text').innerHTML = "💍 It's the wedding day!";
+    groom.style.left = "45%";
+    bride.style.right = "45%";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  daysEl.innerHTML = days;
+  hoursEl.innerHTML = hours;
+  minutesEl.innerHTML = minutes;
+  secondsEl.innerHTML = seconds;
+
+  // Move groom and bride icons
+  const totalDuration = weddingDate - startDate;
+  const elapsed = now - startDate;
+  const progress = Math.min(elapsed / totalDuration, 1);
+
+  groom.style.left = (progress * 45) + '%';
+  bride.style.right = (progress * 45) + '%';
+}
+
+setInterval(updateTimer, 1000);
+updateTimer();
+
+    </script>
 
 </body>
 </html>
