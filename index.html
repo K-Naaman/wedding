@@ -1,244 +1,333 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Nikkah Invitation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+  <title>Wedding Invitation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #fff8f0 url('https://www.transparenttextures.com/patterns/cream-dust.png');
-      font-family: 'Playfair Display', serif;
-      text-align: center;
-      color: #5a4b2e;
-      padding: 40px 20px;
-    }
-    .bismillah {
-      font-family: 'Great Vibes', cursive;
-      font-size: 36px;
-      margin-bottom: 30px;
-      color: #a67c00;
-      animation: fadeIn 2s ease forwards;
-    }
-    .photos {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #f8f8f8, #e0e0e0);
+      font-family: 'Poppins', sans-serif;
       display: flex;
       justify-content: center;
-      gap: 60px;
-      margin: 40px 0;
-      flex-wrap: wrap;
-      animation: fadeIn 2.5s ease forwards;
+      align-items: center;
+      min-height: 100vh;
+  height: auto;
+  padding: 20px 10px;
+  box-sizing: border-box;
     }
-    .photos img {
-      width: 170px;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #d4af37;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.5s;
+
+    
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      width: 95vw;
+      max-width: 1100px;
+      padding: 40px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      animation: popIn 1s ease-out;
+      gap: 40px;
+      flex-wrap: nowrap;
     }
-    .photos img:hover {
-      transform: scale(1.05);
-    }
-    .names {
-      font-family: 'Great Vibes', cursive;
-      font-size: 36px;
-      margin: 20px 0;
-      color: #8b6d1f;
-      animation: fadeIn 3s ease forwards;
-    }
-    .invitation-text {
-      font-size: 22px;
-      margin: 20px 0;
-      animation: fadeIn 3.5s ease forwards;
-    }
-    .details {
-      font-size: 18px;
-      line-height: 1.7;
-      margin-top: 30px;
-      animation: fadeIn 4s ease forwards;
-    }
-    .countdown {
+
+    .photos-carousel {
   display: flex;
+  
   justify-content: center;
-  gap: 20px;
-  margin: 40px 0 10px;
-  animation: fadeIn 4s ease forwards;
+  align-items: center;
+  overflow: hidden;
+  width: 400px; /* Adjust width as needed */
+  height: 500px; /* Should closely match the .card's height */
+  border-radius: 20px;
+  position: relative;
+  margin: 20px auto;
+  flex-shrink: 0;
 }
-.icon {
+
+.photos-carousel img {
   position: absolute;
-  top: -15px;
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
+  display: block;
   object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid #d4af37;
-  transition: left 1s ease, right 1s ease;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 1s ease;
 }
-.timer-box {
+
+.photos-carousel img.active {
+  opacity: 1;
+}
+
+
+    
+
+    .countdowns {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .countdown-wrapper {
+      text-align: center;
+      flex: 1;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    .timer-box {
+  font-size: 10px; /* Smaller label text */
+  color: #5a4b2e;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 4px 6px; /* Reduced padding */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  min-width: 40px;  /* Smaller width */
+  min-height: 40px; /* Smaller height */
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 32px;
-  font-weight: bold;
-  color: #8b6d1f;
-}
-.buffer-bar {
-  position: relative;
-  background: #f5deb3;
-  height: 40px;
-  border-radius: 10px;
-  margin: 20px auto 40px;
-  width: 90%;
-  overflow: hidden;
-}
-    .groom, .bride {
-      position: absolute;
-      top: -5px;
-      font-size: 32px;
-      transition: left 1s ease, right 1s ease;
-    }
-    .groom {
-      left: 0;
-    }
-    .bride {
-      right: 0;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    #timer {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-.label {
-  font-size: 16px;
-  margin-top: 5px;
-  color: #5a4b2e;
-}
-#until-text {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 20px;
-  color: #8b6d1f;
-  animation: fadeIn 4.5s ease forwards;
+  justify-content: center;
 }
 
+/* Smaller number inside */
+.timer-number {
+  font-size: 14px; /* You can lower this further if needed */
+  font-weight: bold;
+}
+
+
+    .timer-box div:first-child {
+  font-size: 24px;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+  min-width: 30px;
+  transition: opacity 0.3s ease;
+}
+
+.timer-box div:first-child.fade {
+  opacity: 0.3;
+}
+
+    #nikkah-text, #walimah-text {
+      font-size: 22px;
+      font-weight: 600;
+      color: #8b6d1f;
+      margin-bottom: 10px;
+    }
+
+    .photos {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  animation: fadeIn 2.5s ease forwards;
+}
+
+.photos img {
+  max-width: 120px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+        .photos-carousel {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4; /* maintains portrait ratio */
+    margin-top: 50px;
+  }
+
+  .photos-carousel img {
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+      .countdowns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+      }
+      .photos{
+        display: none;
+      }
+
+      .countdowns {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-evenly;
+      }
+
+      .countdown-wrapper {
+        flex: 1;
+      }
+
+      .image-container {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="bismillah">
-    بسم الله الرحمن الرحيم
-  </div>
-
-  <div class="photos">
-    <div>
-      <img src="bride.jpeg" alt="Bride Photo">
-      <div style="margin-top:10px;"></div>
-    </div>
-    <div>
-      <img src="groom.jpeg" alt="Groom Photo">
-      <div style="margin-top:10px;"></div>
-    </div>
-  </div>
-
-  <div class="names">
-    Khamis & Farida
-  </div>
-
-  <div class="invitation-text">
-    Invite you to attend their wedding
-    <div class="invitation-text">
-      on
-    </div>
-  </div>
-  
-
  
-  <div class="details">
-    <strong>Nikkah:</strong> 13<sup>th</sup> June 2025 after Asr Salah at Masjid Aqswa Kisauni<br>
-    <strong>Lunch:</strong> 14<sup>th</sup> June 2025 at Star of the Sea Hall.
-  </div>
 
-  <div class="countdown">
-    <div class="timer-box">
-      <div id="days">0</div>
-      <div class="label">Days</div>
+  <div class="card">
+    <!-- Image -->
+     
+    <div class="photos-carousel">
+      
+      <img src="1.png" alt="Groom Photo">
+      
     </div>
-    <div class="timer-box">
-      <div id="hours">0</div>
-      <div class="label">Hours</div>
-    </div>
-    <div class="timer-box">
-      <div id="minutes">0</div>
-      <div class="label">Mins</div>
-    </div>
-    <div class="timer-box">
-      <div id="seconds">0</div>
-      <div class="label">Secs</div>
-    </div>
-  </div>
-  
-  <div id="until-text">
-    <div>until</div>
-    <div>Khamis & Farida's Nikkah</div>
-  </div>
-  
-  <div class="buffer-bar">
-    <img src="groom.jpeg" alt="Groom Photo" class="icon" id="groom">
-    <img src="bride.jpeg" alt="Bride Photo" class="icon" id="bride">
-  </div>
-  
+    
+    
+    
 
+      <!-- Nikkah Countdown -->
+      <div class="countdown-wrapper">
+        <div id="nikkah-text">NIKKAH</div>
+        <h3>13 | JUNE | 2025</h3>
+        <h2>MASJID AQSWA</h2>
+        <div class="countdown">
+          <div class="timer-box"><div id="nikkah-days">00</div><div>Days</div></div>
+          <div class="timer-box"><div id="nikkah-hours">00</div><div>Hours</div></div>
+          <div class="timer-box"><div id="nikkah-minutes">00</div><div>Mins</div></div>
+          <div class="timer-box"><div id="nikkah-seconds">00</div><div>Secs</div></div>
+        
+        </div>
+      </div>
+
+      <!-- Walimah Countdown -->
+      <div class="countdown-wrapper">
+        <div id="walimah-text">WALIMAH</div>
+        <h3>14 | JUNE | 2025</h3>
+          <h2>MEKATILILI HALL</h2>
+        <div class="countdown">
+          <div class="timer-box"><div id="walimah-days">00</div><div>Days</div></div>
+          <div class="timer-box"><div id="walimah-hours">00</div><div>Hours</div></div>
+          <div class="timer-box"><div id="walimah-minutes">00</div><div>Mins</div></div>
+          <div class="timer-box"><div id="walimah-seconds">00</div><div>Secs</div></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    const daysEl = document.getElementById('days');
-const hoursEl = document.getElementById('hours');
-const minutesEl = document.getElementById('minutes');
-const secondsEl = document.getElementById('seconds');
-const groom = document.getElementById('groom');
-const bride = document.getElementById('bride');
-
-// Wedding date
-const weddingDate = new Date('2025-06-14T15:30:00').getTime();
-const startDate = new Date().getTime();
-
-function updateTimer() {
-  const now = new Date().getTime();
-  const distance = weddingDate - now;
-
-  if (distance < 0) {
-    document.getElementById('until-text').innerHTML = "💍 It's the wedding day!";
-    groom.style.left = "45%";
-    bride.style.right = "45%";
-    return;
+    function updateElement(id, newValue) {
+  const el = document.getElementById(id);
+  if (el.innerText !== newValue) {
+    el.classList.add('fade');
+    setTimeout(() => {
+      el.innerText = newValue;
+      el.classList.remove('fade');
+    }, 1000);
   }
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  daysEl.innerHTML = days;
-  hoursEl.innerHTML = hours;
-  minutesEl.innerHTML = minutes;
-  secondsEl.innerHTML = seconds;
-
-  // Move groom and bride icons
-  const totalDuration = weddingDate - startDate;
-  const elapsed = now - startDate;
-  const progress = Math.min(elapsed / totalDuration, 1);
-
-  groom.style.left = (progress * 45) + '%';
-  bride.style.right = (progress * 45) + '%';
 }
 
-setInterval(updateTimer, 1000);
-updateTimer();
+  </script>
 
-    </script>
+  <script>
+    const nikkahDate = new Date('2025-06-13T15:30:00').getTime();
+    const walimahDate = new Date('2025-06-14T13:00:00').getTime();
+
+    function updateCountdown(targetDate, prefix) {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById(prefix + '-text').innerHTML = `🎉 ${prefix === 'nikkah' ? "It's the Nikkah Day!" : "It's Walimah Day!"}`;
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      updateElement(`${prefix}-days`, String(days).padStart(2, '0'));
+updateElement(`${prefix}-hours`, String(hours).padStart(2, '0'));
+updateElement(`${prefix}-minutes`, String(minutes).padStart(2, '0'));
+updateElement(`${prefix}-seconds`, String(seconds).padStart(2, '0'));
+    }
+
+    function loopCountdowns() {
+      updateCountdown(nikkahDate, 'nikkah');
+      updateCountdown(walimahDate, 'walimah');
+    }
+
+    loopCountdowns();
+    setInterval(loopCountdowns, 1000);
+  </script>
+
+<script>
+  const photos = document.querySelectorAll('.photos-carousel img');
+  let currentIndex = 0;
+
+  function showPhoto(index) {
+    photos.forEach((img, i) => {
+      img.classList.toggle('active', i === index);
+    });
+  }
+
+  function nextPhoto() {
+    currentIndex = (currentIndex + 1) % photos.length;
+    showPhoto(currentIndex);
+  }
+
+  showPhoto(currentIndex); // Show first image
+  setInterval(nextPhoto, 5000); // Change every 5 seconds
+</script>
+
+<script>
+  const photo = document.querySelectorAll('.photos-carousel img');
+  const todayIndex = new Date().getDate() % photos.length;
+  
+  photos.forEach((img, i) => {
+    img.classList.toggle('active', i === todayIndex);
+  });
+</script>
+
 
 </body>
 </html>
